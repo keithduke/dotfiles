@@ -1,8 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-" A minimalist vimrc, with on demand loading of plugins
 "
-" This is the personal .vimrc of Keith Duke
+" This is my .vimrc
 " There are many like it, but this one is mine.
 " 
 " I've drawn inspiration from the following
@@ -26,6 +25,10 @@
 "                             Basic Tweaks
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" better safe than sorry
+" https://stackoverflow.com/a/5845583
+set nocompatible
+
 " see :help :filetype-overview
 filetype plugin indent on
 
@@ -45,17 +48,19 @@ set showmatch                   " show matching brackets/parenthesis
 set number                      " Line numbers on
 set virtualedit=onemore         " allow for cursor beyond last character
 
+if filereadable(expand("~/.vim/pack/bundle/start/jellybeans/colors/jellybeans.vim"))
+    set term=xterm-256color " TODO only need this for color to work, why though
+                            " https://superuser.com/q/311370
+    set background=dark
+    color jellybeans
+    let g:airline_theme='jellybeans'
+endif
+
 " space over tab
 " https://softwareengineering.stackexchange.com/a/66
 set shiftwidth=4                " use indents of 4 spaces
 set tabstop=4                   " an indentation every four columns
 set expandtab                   " 4 space tabs everywhere
-
-" 80 columns width
-" https://stackoverflow.com/a/111009
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
 
 " searching tweaks
 set incsearch                   " find as you type search, hit '<CR>' to stop.
@@ -90,7 +95,7 @@ set backup                      " backups are nice ...
 if has('persistent_undo')
     set undofile                "so is persistent undo ...
     set undolevels=1000         "maximum number of changes that can be undone
-    set undoreload=10000        "maximum number lines to save for undo on a buffer reload
+    set undoreload=10000        "maximum number lines to save for undo on reload
 endif
 
 
@@ -98,30 +103,7 @@ endif
 "                                  \ /
 "                          -----==( o )==-----
 "
-"                          ruler & statusline
-"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set showmode                    " display the current mode
-if has('cmdline_info')
-    set ruler                   " show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-    set showcmd                 " show partial commands in status line and
-                                " selected characters/lines in visual mode
-endif
-
-if has('statusline')
-    set laststatus=2
-    " Broken down into easily includeable segments
-    set statusline=%<%f\        " Filename
-    set statusline+=%w%h%m%r    " Options
-    " set statusline+=%{fugitive#statusline()} "  Git TODO turned off, need
-                                               "  to configure plug first
-    set statusline+=\ [%{&ff}/%Y] " filetype
-    set statusline+=\ [%{getcwd()}] " current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-endif
-
 
 " key (re)mappings 
 " the default leader is '\', but many people, myself included prefer ',' as it's
@@ -155,8 +137,28 @@ set foldmethod=indent   " fold based on indent level
 nnoremap <space> za
 
 
-" Bundles TODO coming soon
+" Bundles
+" Using Vim 8 built in bundle support, all bundles I use are
+" just cloned into ~/.vim/pack/bundle/start/
+" here is what I currently use and any config jiggering
+" https://github.com/altercation/vim-colors-solarized.git
+" https://github.com/vim-airline/vim-airline.git
+" https://github.com/scrooloose/nerdtree.git
+" https://github.com/tpope/vim-fugitive.git
+" https://github.com/jlanzarotta/bufexplorer.git
+" https://github.com/vim-airline/vim-airline-themes.git
 
+
+map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+map <leader>e :NERDTreeFind<CR>
+nmap <leader>nt :NERDTreeFind<CR>
+
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,3 +167,4 @@ nnoremap <space> za
 " //||\\                                                                       "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
