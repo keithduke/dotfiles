@@ -1,0 +1,12 @@
+################################################################################
+# kmduke's screenrc
+# there are many like it, but this one is mine
+################################################################################
+#
+# I leave the startup message on, support the software you use
+#
+vbell off
+defscrollback 1000
+hardstatus off
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%1 %{..G} %H %{..Y} %Y-%m-%d %c"
