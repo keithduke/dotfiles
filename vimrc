@@ -141,7 +141,7 @@ nnoremap <space> za
 " Using Vim 8 built in bundle support, all bundles I use are
 " just cloned into ~/.vim/pack/bundle/start/
 " here is what I currently use and any config jiggering
-" https://github.com/altercation/vim-colors-solarized.git
+" https://github.com/nanotech/jellybeans.vim.git
 " https://github.com/vim-airline/vim-airline.git
 " https://github.com/scrooloose/nerdtree.git
 " https://github.com/tpope/vim-fugitive.git
