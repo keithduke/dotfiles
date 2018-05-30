@@ -92,12 +92,9 @@ nnoremap <C-l> <C-w>l
 set hidden                      " more than one unsaved buffer
 set history=500                 " default is 20
 set viewoptions=folds,options,cursor,unix,slash " :help viewoptions
-set backup                      " backups are nice ...
-if has('persistent_undo')
-    set undofile                "so is persistent undo ...
-    set undolevels=1000         "maximum number of changes that can be undone
-    set undoreload=10000        "maximum number lines to save for undo on reload
-endif
+set nobackup                    " no backup, swapfiles
+set nowritebackup
+set noswapfile
 
 
 " key (re)mappings 
@@ -168,4 +165,3 @@ let NERDTreeKeepTreeInNewTab=1
 " //||\\                                                                       
 "                                                                              
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
