@@ -43,18 +43,20 @@ set backspace=indent,eol,start  " proper backspace behavior
 set linespace=0                 " No extra spaces between rows
 set nowrap                      " wrap long lines
 set autoindent                  " indent at the same level as the previous line
+set showmatch                   " show matching brackets/parenthesis
 
 " ui tweaks
-set showmatch                   " show matching brackets/parenthesis
 set number                      " Line numbers on
 set virtualedit=onemore         " allow for cursor beyond last character
 
-if filereadable(expand("~/.vim/pack/bundle/start/jellybeans/colors/jellybeans.vim"))
+if filereadable(expand("~/.vim/pack/bundle/start/vim-colors-solarized/colors/solarized.vim"))
     set term=xterm-256color " TODO only need this for color to work, why though
                             " https://superuser.com/q/311370
+    let g:solarized_termcolors=256
+    syntax enable
     set background=dark
-    color jellybeans
-    let g:airline_theme='jellybeans'
+    colorscheme solarized
+    let g:airline_theme='solarized'
 endif
 
 " space over tab
@@ -70,9 +72,6 @@ set ignorecase                  " case insensitive search
 set smartcase                   " case sensitive when uppercase present
 set wildmenu                    " command-line completion
 set wildmode=list:longest,full  " command <Tab> completion
-
-" clear highlighted search
-nmap <silent> <leader>/ :nohlsearch<CR>
 
 " movement and scrolling tweaks
 set scrolljump=5                " lines to scroll when cursor leaves screen
@@ -105,18 +104,9 @@ let mapleader = ','
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
-" For when you forget to sudo.. Really Write the file.
-cmap w!! w !sudo tee % >/dev/null
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <C-^>
-
-" Get off my lawn ( loved it, borrowed from thoughtbot )
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
 
 " Folding
 " :help usr_28
@@ -139,13 +129,12 @@ nnoremap <space> za
 " Using Vim 8 built in bundle support, all bundles I use are
 " just cloned into ~/.vim/pack/bundle/start/
 " here is what I currently use and any config jiggering
-" https://github.com/nanotech/jellybeans.vim.git
 " https://github.com/vim-airline/vim-airline.git
 " https://github.com/scrooloose/nerdtree.git
 " https://github.com/tpope/vim-fugitive.git
 " https://github.com/jlanzarotta/bufexplorer.git
 " https://github.com/vim-airline/vim-airline-themes.git
-
+" https://github.com/altercation/vim-colors-solarized.git
 
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 map <leader>e :NERDTreeFind<CR>
