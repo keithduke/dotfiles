@@ -1,2 +1,2 @@
 # dotfiles
-Various dotfiles I like to have handy
+dotfiles I like to have handy
